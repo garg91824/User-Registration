@@ -1,0 +1,63 @@
+{%load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href='{%static "css/bootstrap.css"%}'>
+	</head>
+<body>
+	<!-- this is a navbar -->
+	<nav class="navbar navbar-default" role="navigation">
+		<ul class="nav navbar-nav">
+      <li {% if current_page == "home" %}class="active"{%endif%}><a href="/">Home</a></li>
+      {% if user.is_authenticated %}
+      <li {% if current_page == "dashboard" %}class="active"{%endif%}><a href="/dashboard/">Dashboard</a></li>
+      {% else %}
+      <li {% if current_page == "register" %}class="active"{%endif%}><a href="{{BASE_URL}}/register">Register
+      </a></li>
+      {% endif %}
+    </ul>
+		
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+		
+			<ul class="nav navbar-nav navbar-right">
+			{%if user.is_authenticated%}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Go Back <b class="caret"></b></a>
+					<ul class="dropdown-menu" role="menu">
+					            <li><a href="/logout">Logout</a></li>
+					          </ul>
+				</li>
+			{%else%}
+			<li><a href="/login">Login</a></li>
+			{%endif%}
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+	
+		<div class="container">
+		<div class="row">
+			<!-- bio -->
+
+			<div class="col-md-3 text-right">
+			{%if user.is_authenticated%}
+				<div>
+					<p class="lead">
+						{{user.user.username}}
+						<br>
+					</p>
+				</div>
+				<hr>
+			{%else%}
+				<h4>Build a page with django</h4>
+			{%endif%}
+
+			</div>
+
+	<!-- postbox div starts here -->
+{%block content%}
+{%endblock%}
+	<script src="{%static 'js/jquery.js'%}" type="text/javascript" charset="utf-8" ></script>
+	<script src="{%static 'js/bootstrap.js'%}" type="text/javascript" charset="utf-8" ></script>
+</body>
+</html>

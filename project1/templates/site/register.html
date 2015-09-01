@@ -1,0 +1,54 @@
+{%extends "layout/header.html"%}
+{%block content%}
+<div class="col-md-9">
+{%if registered%}
+<div class="jumbotron">
+	<h3>Thank you for registering !</h3>
+	<p>Return to <a href="/">homepage</a></p>
+</div>
+{%else%}
+    <form class="form-horizontal" id="user_form" method="POST" action="/register/" enctype="multipart/form-data">{% csrf_token %}
+        <fieldset>
+            <center><legend>SignUp page</legend></center>
+
+            <div class="form-group">
+                <div class="col-lg-10">
+                <input type="text" class="form-control" id="Name" placeholder="Enter First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                <input type="text" class="form-control" id="Email" placeholder="Enter Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="Number" placeholder="Enter phone number">
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- <label for="inputPassword" class="col-lg-2 control-label">Password</label> -->
+                <div class="col-lg-10">
+                <input type="password" class="form-control" id="Password" placeholder="Password">
+                  </div>
+            </div>
+            <form id="defaultForm" method="post" class="form-horizontal">
+             <div class="form-group">
+            <label class="col-sm-3 control-label">Captcha</label>
+             <div class="col-sm-9 captchaContainer">
+            <div id="recaptcha"></div>
+            </div>
+             </div>
+            </form>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <button type="submit" class="btn btn-success btn-block">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{%endif%}
+</div>
+{%endblock%}
+<!-- 
+     -->
